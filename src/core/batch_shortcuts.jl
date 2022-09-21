@@ -109,8 +109,8 @@ function create_pool(; enable_auto_scale=false, auto_scale_formula=nothing,
             push!(__active_pools__, Dict("pool_id" => pool_id, "clients" => clients_per_pool[i], "credentials" => credential_per_pool[i],
                 "resources" => resources_per_pool[i]))
         catch e
+            println(e)
             if typeof(e) == PyCall.PyError && e.val.error.code == "PoolExists"
-                println(e)
                 __verbose__ && print(join(["Pool ", i ," of ", num_pools, " in ", credential_per_pool[i]["_REGION"]," already exists.\n"]))
                 push!(__active_pools__, Dict("pool_id" => pool_id, "clients" => clients_per_pool[i], "credentials" => credential_per_pool[i],
                     "resources" => resources_per_pool[i]))
@@ -198,8 +198,8 @@ function create_pool_and_resource_file(startup_script; enable_auto_scale=false, 
             push!(__active_pools__, Dict("pool_id" => pool_id, "clients" => clients_per_pool[i], "credentials" => credential_per_pool[i],
                 "resources" => resources_per_pool[i]))
         catch e
+            println(e)
             if typeof(e) == PyCall.PyError && e.val.error.code == "PoolExists"
-                println(e)
                 __verbose__ && print(join(["Pool ", i ," of ", num_pools, " in ", credential_per_pool[i]["_REGION"]," already exists.\n"]))
                 push!(__active_pools__, Dict("pool_id" => pool_id, "clients" => clients_per_pool[i], "credentials" => credential_per_pool[i],
                     "resources" => resources_per_pool[i]))
